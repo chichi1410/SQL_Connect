@@ -11,13 +11,13 @@ import java.sql.Date;
 public class KhachHang {
     private int ID;
     private String fullName;
-    private Date ngaySinh;
+    private Date dateOfBirth;
     private String address; 
 
-    public KhachHang(int ID, String fullName, Date ngaySinh, String address) {
+    public KhachHang(int ID, String fullName, Date dateOfBirth, String address) {
         this.ID = ID;
         this.fullName = fullName;
-        this.ngaySinh = ngaySinh;
+        this.dateOfBirth = dateOfBirth;
         this.address = address;
     }
 
@@ -40,12 +40,12 @@ public class KhachHang {
         this.fullName = fullName;
     }
 
-    public Date getNgaySinh() {
-        return ngaySinh;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getAddress() {
@@ -54,6 +54,12 @@ public class KhachHang {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    //
+
+    @Override
+    public String toString() {
+        return "KhachHang{" + "ID=" + ID + ", fullName=" + fullName + ", dateOfBirth=" + dateOfBirth + ", address=" + address + '}';
     }
     
 }

@@ -55,6 +55,11 @@ public class Book {
     public void setYearOfPublication(int yearOfPublication) {
         this.yearOfPublication = yearOfPublication;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" + "ID=" + ID + ", book Name=" + bookName + ", selling Price=" + sellingPrice + ", year Of Publication=" + yearOfPublication + '}';
+    }
     
     
 }
