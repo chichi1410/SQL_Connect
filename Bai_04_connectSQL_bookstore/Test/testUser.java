@@ -56,5 +56,12 @@ public class testUser {
         for (User user : findCondition) {
             System.out.println(user.toString());
         }
+        // atack database = sql
+        System.out.println("------------------------------------------------");
+        System.out.println("atack");
+        
+        User user11 = new User("X\' or 1=1; -- ", "", "");
+        User atack1 = UserDAO.getInstance().selectById(user11);
+        System.out.println(atack1);
     }
 }
