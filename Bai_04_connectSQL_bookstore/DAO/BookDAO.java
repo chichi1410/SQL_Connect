@@ -167,7 +167,7 @@ public class BookDAO implements DAOInterface<Book> {
     }
 
     @Override
-    public ArrayList<Book> selectByCondition(String condition) {
+    public ArrayList<Book> selectByCondition(String condition) { // chon theo dieu kien
           ArrayList<Book> ketQua = new ArrayList<Book>();
             try {
             // b1 tao conect

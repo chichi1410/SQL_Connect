@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.ResultSet;
 
 /**
  *
@@ -52,7 +53,7 @@ public class UserDAO implements DAOInterface<User>{
                     + " userName = '" +t.getUserName()+ "'";
             
             int ketQua = st.executeUpdate(sql);
-            System.out.println("ban da update cau lenh " + sql);
+            System.out.println("ban da update cau lenh :\n" + sql);
             System.out.println("ban da thay doi "+ketQua+" dong");
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -62,22 +63,83 @@ public class UserDAO implements DAOInterface<User>{
 
     @Override
     public int delete(User t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection con = JDBCUtil.getConnection();
+            Statement st = con.createStatement();
+            String sql = "DELETE FROM nhasach.user WHERE userName = '" + t.getUserName()+"'; ";
+            int ketQua = st.executeUpdate(sql);
+            System.out.println("ban da thuc thi cau lenh :\n" +sql);
+            System.out.println("ban da thay doi "+ketQua+" dong");
+            
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
     public ArrayList<User> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<User> ketQua = new ArrayList<User>();
+        try {
+            Connection con = JDBCUtil.getConnection();
+            Statement st = con.createStatement();
+            String sql = "SELECT * FROM nhasach.user";
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                String name = rs.getString("name");
+                
+                User user = new User(userName, password, name);
+                ketQua.add(user);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ketQua;
     }
 
     @Override
     public User selectById(User t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        User ketQua = null;
+        try {
+            Connection con = JDBCUtil.getConnection();
+            Statement st = con.createStatement();
+            String sql = "SELECT * FROM nhasach.user WHERE userName = '"+t.getUserName()+"'";
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                String name = rs.getString("name");
+                ketQua = new User(name);
+                
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+        }
+        return ketQua;
     }
 
     @Override
     public ArrayList<User> selectByCondition(String condition) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<User> ketQua = new ArrayList<User>();
+        try {
+            Connection con = JDBCUtil.getConnection();
+            Statement st = con.createStatement();
+            String sql = "SELECT * FROM nhasach.user WHERE "+condition;
+            
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                String name = rs.getString("name");
+                User user = new User(userName, password, name);
+                ketQua.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ketQua;
     }
     
 }

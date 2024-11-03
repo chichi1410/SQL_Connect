@@ -13,8 +13,11 @@ public class User {
     private String password;
     private String name;
     
-    public User (){
-        
+    public User (String name){
+        this.name = name;
+    }
+
+    public User() {
     }
 
     public User(String userName, String password, String name) {
