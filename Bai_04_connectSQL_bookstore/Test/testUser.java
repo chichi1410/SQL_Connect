@@ -47,7 +47,7 @@ public class testUser {
         find.setUserName("nguyenhoa0");
         
         User userfind = UserDAO.getInstance().selectById(find);
-        System.out.println(userfind);
+        System.out.println(userfind);   
         
         // fint co dieu kien
         System.out.println("------------------------------------------------");
