@@ -23,7 +23,7 @@ public class testUser {
          }
 
        // update
-        User user2 = new User("nguyenhoa", "hoadz123", "chichine");
+        User user2 = new User("nguyenhoa", "hoadz1234", "chichixinh4");
         UserDAO.getInstance().update(user2);
             
         // delete

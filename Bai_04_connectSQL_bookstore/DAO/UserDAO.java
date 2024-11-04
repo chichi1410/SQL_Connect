@@ -79,16 +79,18 @@ public class UserDAO implements DAOInterface<User>{
     public int update(User t) {
         try {
             Connection con = JDBCUtil.getConnection();
-            Statement st = con.createStatement();
-            String sql = "UPDATE nhasach.user SET "
-                  
-                    + "password = '"+t.getPassword()+"'"
-                    + ",name = '"+t.getName()+"' WHERE "
-                    + " userName = '" +t.getUserName()+ "'";
+           // Statement st = con.createStatement();
+            String sql = "UPDATE nhasach.user SET password = ?, name = ? WHERE userName = ?";
+            PreparedStatement pst  = con.prepareStatement(sql);
+            pst.setString(1, t.getPassword());
+            pst.setString(2, t.getName());
+            pst.setString(3, t.getUserName());
             
-            int ketQua = st.executeUpdate(sql);
+            int ketQua = pst.executeUpdate(sql);
             System.out.println("ban da update cau lenh :\n" + sql);
             System.out.println("ban da thay doi "+ketQua+" dong");
+            
+            JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
